@@ -62,7 +62,9 @@ export default defineConfig({
     Logger: 1,
   }), astrowind({
     config: './src/config.yaml',
-  }), decapCmsOauth()],
+  }), decapCmsOauth({
+    decapCMSSrcUrl: "https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js",
+  })],
 
   image: {
     domains: ['cdn.pixabay.com'],

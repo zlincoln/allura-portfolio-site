@@ -11,6 +11,7 @@ const { post } = Astro.props ;
 const image = await findImage(post.data.image);
 ---
 <div>
-    <img src={image} />
+    <pre>{JSON.stringify(post, undefined, 2)}</pre>
+    <Picture src={image} alt="hello world" height="200" width="400" />
 </div>
 

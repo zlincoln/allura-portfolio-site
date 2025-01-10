@@ -1,7 +1,7 @@
 ---
 title: Muse Bar & Bistro
 description: Hello World
-image: /_astro/default.png
+image: /assets/IMG_0302.JPG
 url: https://example.com
 tags:
   - Graphic Design

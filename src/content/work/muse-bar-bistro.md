@@ -1,7 +1,7 @@
 ---
 title: Muse Bar & Bistro
 description: Hello World
-image: /_astro/resonara-hero.webp
+image: /src/assets/images/harrison-goldberg.jpg
 url: https://example.com
 tags:
   - Graphic Design

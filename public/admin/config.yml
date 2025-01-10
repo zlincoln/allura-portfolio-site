@@ -8,7 +8,7 @@ backend:
 collections:
 - name: work
   label: Work
-  folder: content/work
+  folder: src/content/work
   create: true
   slug: '{{slug}}'
   fields:
@@ -22,7 +22,7 @@ collections:
   - {label: Body, name: body, widget: markdown}
 - name: case-study
   label: Case Study
-  folder: content/case-study
+  folder: src/content/case-study
   create: true
   slug: '{{slug}}'
   fields:

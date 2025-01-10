@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { findImage } from "~/utils/images";
+import Picture from "astro/components/Picture.astro";
+
+interface Props {
+    post: CollectionEntry<'work'>;
+}
+
+const { post } = Astro.props ;
+const image = await findImage(post.data.image);
+---
+<div>
+    <img src={image} />
+</div>
+

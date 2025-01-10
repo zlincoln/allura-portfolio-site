@@ -13,9 +13,11 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Picture from 'astro/components/Picture.astro';
 import { Image } from 'astro:assets';
+import { findImage } from '~/utils/images';
 
 
 import { getCollection } from 'astro:content';
+import WorkGridItem from '~/components/work/WorkGridItem.astro';
 const work = await getCollection('work');
 
 
@@ -88,9 +90,7 @@ const metadata = {
     </div>
     <div class="grid sm:grid-cols-2 md:grid-cols-3">
       {work.map(workItem => (
-        <div>
-            <Picture src={workItem.data.image} alt={workItem.data.title} inferSize={true} />
-        </div>  
+        <WorkGridItem post={workItem} />
       ))}
       <div>
           <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">

@@ -11,6 +11,13 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Picture from 'astro/components/Picture.astro';
+import { Image } from 'astro:assets';
+
+
+import { getCollection } from 'astro:content';
+const work = await getCollection('work');
+
 
 const metadata = {
   title: 'Allura Lincoln',
@@ -74,15 +81,17 @@ const metadata = {
       </div>
     </div>
   </div>
-  <!-- Features Widget *************** -->
+  <!-- First Portfolio Loop *************** -->
   <section class="container max-w-7xl mx-auto py-6 md:py-12">
     <div class="border-t border-black dark:border-white my-3 md:my-6 pt-1">
       <h1 class="text-black dark:text-white uppercase font-bold">Portfolio</h1>
     </div>
     <div class="grid sm:grid-cols-2 md:grid-cols-3">
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
-      </div>
+      {work.map(workItem => (
+        <div>
+            <Picture src={workItem.data.image} alt={workItem.data.title} inferSize={true} />
+        </div>  
+      ))}
       <div>
           <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
       </div>

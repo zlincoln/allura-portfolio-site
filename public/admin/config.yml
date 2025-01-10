@@ -8,7 +8,7 @@ backend:
 collections:
 - name: work
   label: Work
-  folder: work
+  folder: content/work
   create: true
   slug: '{{slug}}'
   fields:
@@ -22,7 +22,7 @@ collections:
   - {label: Body, name: body, widget: markdown}
 - name: case-study
   label: Case Study
-  folder: case-study
+  folder: content/case-study
   create: true
   slug: '{{slug}}'
   fields:
@@ -34,5 +34,26 @@ collections:
   - {label: Date, name: date, widget: datetime}
   - {label: Featured, name: featured, widget: boolean}
   - {label: Body, name: body, widget: markdown}
+- name: 'post'
+  label: 'Post'
+  folder: 'src/content/post'
+  create: true
+  fields:
+  - { label: 'Title', name: 'title', widget: 'string' }
+  - { label: 'Excerpt', name: 'excerpt', widget: 'string' }
+  - { label: 'Category', name: 'category', widget: 'string' }
+  - {
+      label: 'Tags',
+      name: 'tags',
+      widget: 'list',
+      allow_add: true,
+      allow_delete: true,
+      collapsed: false,
+      field: { label: 'Tag', name: 'tag', widget: 'string' },
+    }
+  - { label: 'Image', name: 'image', widget: 'string' }
+  - { label: 'Publish Date', name: 'publishDate', widget: 'datetime', required: false }
+  - { label: 'Author', name: 'author', widget: 'string' }
+  - { label: 'Content', name: 'body', widget: 'markdown' }
 media_folder: 'src/assets/images'
 public_folder: '/_astro'

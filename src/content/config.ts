@@ -65,6 +65,17 @@ const postCollection = defineCollection({
   }),
 });
 
+const work = defineCollection({
+  loader: glob({ pattern: "*.md", base: "src/data/work" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    image: z.string(),
+    link: z.string(),
+  }),
+});
+
 export const collections = {
   post: postCollection,
+  work: work,
 };

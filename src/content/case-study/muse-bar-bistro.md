@@ -13,11 +13,15 @@ studySections:
       - image: /assets/2024_jan_cocktailspecials.jpg
       - image: /assets/lunch_photo.jpg
       - image: /assets/cocktail_menu.jpg
-  - title: Digital & Print Media
-    body: Day of the Dead Posters & Personalized Menus
+  - title: Special & Cocktail Menus
+    body: Monthly themed cocktail specials and private & special event menus.
     gallery:
-      - image: ''
-      - image: ''
+      - image: /assets/2024_cinco.jpg
+      - image: /assets/2024_august_ct.jpg
+      - image: /assets/2024_easter.jpg
+      - image: /assets/2024_july.jpg
+      - image: /assets/2024_may_ct.jpg
+      - image: /assets/2024_may_ct.jpg
 description: Hello wooorrlldd!
 url: https://example.com
 tags:

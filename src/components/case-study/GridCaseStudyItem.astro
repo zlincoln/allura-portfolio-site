@@ -11,7 +11,7 @@ const { post } = Astro.props ;
 const image = await findImage(post.data.image);
 ---
 <div>
-    <a href="/case-study/{post.slug}">
+    <a href=`/case-study/${post.id}`>
         <Picture src={image} alt="hello world" height="200" width="400" />
     </a>
 </div>

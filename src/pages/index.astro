@@ -79,7 +79,7 @@ const metadata = {
             </table>
           </div>
         </div>
-        <button id="button" class="block text-white focus:ring-4 bg-black dark:text-black dark:bg-white focus:outline-none font-bold text-sm px-5 py-2.5 text-center w-full uppercase" type="button">
+        <button  id="button" class="block text-white focus:ring-4 bg-black dark:text-black dark:bg-white focus:outline-none font-bold text-sm px-5 py-2.5 text-center w-full uppercase" type="button">
           Work With Me
         </button>
       </div>
@@ -104,17 +104,11 @@ const metadata = {
       {caseStudies.map(caseStudyItem => (
         <GridCaseStudyItem post={caseStudyItem} />
       ))}
-      <div>
-        <p class="dark:text-white">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis reprehenderit animi enim labore nam velit autem voluptatum quae aspernatur aliquam? Laboriosam non iusto, natus ab alias assumenda corrupti culpa deserunt.</p>
-        <button id="button" class="block text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
-          Toggle modal
-        </button>
-      </div>
     </div>
   </section>
   <section class="container max-w-7xl mx-auto py-6 md:py-12">
     <div class="border-t border-black dark:border-white my-3 md:my-6 pt-1">
-      <h1 class="text-black dark:text-white uppercase font-bold">Legacy Portfolio</h1>
+      <h1 class="text-black dark:text-white uppercase font-bold">Artworks</h1>
     </div>
     <div class="grid sm:grid-cols-2 md:grid-cols-3">
       <div>
@@ -139,28 +133,19 @@ const metadata = {
   </section>
   
 
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/onwidget/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
+  <CallToAction>
     <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
+      Allura Lincoln
     </Fragment>
-
     <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
+      <p class="mb-3">Let’s connect and bring your vision to life.</p>
+      <button class="text-white focus:ring-4 bg-black dark:text-black dark:bg-white focus:outline-none font-bold text-sm px-5 py-2.5 text-center w-full uppercase" type="button">
+        Work With Me
+      </button>
     </Fragment>
   </CallToAction>
   <!-- Main modal -->
-  <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div id="modal-contact" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-2xl max-h-full">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -169,7 +154,7 @@ const metadata = {
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
             Terms of Service
           </h3>
-          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="modal-contact">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             <span class="sr-only">Close modal</span>
           </button>

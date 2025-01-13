@@ -12,7 +12,8 @@ const image = await findImage(post.data.image);
 ---
 <div>
     <a href=`/case-study/${post.id}`>
-        <Picture src={image} alt="hello world" height="200" width="400" />
+        <span>{post.data.title}</span>
+        <img src={image} alt=`${post.data.title}` />
     </a>
 </div>
 

@@ -18,7 +18,9 @@ import { findImage } from '~/utils/images';
 
 import { getCollection } from 'astro:content';
 import WorkGridItem from '~/components/work/WorkGridItem.astro';
+import GridCaseStudyItem from '~/components/case-study/GridCaseStudyItem.astro';
 const work = await getCollection('work');
+const caseStudies = await getCollection('case-study');
 
 
 const metadata = {
@@ -92,21 +94,6 @@ const metadata = {
       {work.map(workItem => (
         <WorkGridItem post={workItem} />
       ))}
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">
-      </div>
     </div>
   </section>
   <section class="container max-w-7xl mx-auto py-6 md:py-12">
@@ -114,12 +101,9 @@ const metadata = {
       <h1 class="text-black dark:text-white uppercase font-bold">Case Study</h1>
     </div>
     <div class="grid md:grid-cols-3 gap-8">
-      <div>
-        <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-      </div>
+      {caseStudies.map(caseStudyItem => (
+        <GridCaseStudyItem post={caseStudyItem} />
+      ))}
       <div>
         <p class="dark:text-white">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis reprehenderit animi enim labore nam velit autem voluptatum quae aspernatur aliquam? Laboriosam non iusto, natus ab alias assumenda corrupti culpa deserunt.</p>
         <button id="button" class="block text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">

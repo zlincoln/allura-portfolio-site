@@ -4,13 +4,15 @@ import { findImage } from "~/utils/images";
 import Picture from "astro/components/Picture.astro";
 
 interface Props {
-    post: CollectionEntry<'work'>;
+    post: CollectionEntry<'case-study'>;
 }
 
 const { post } = Astro.props ;
 const image = await findImage(post.data.image);
 ---
 <div>
-    <Picture src={image} alt="hello world" height="200" width="400" />
+    <a href="/case-study/{post.slug}">
+        <Picture src={image} alt="hello world" height="200" width="400" />
+    </a>
 </div>
 

@@ -65,11 +65,16 @@ const postCollection = defineCollection({
   }),
 });
 
-const work = defineCollection({
+const workCollection = defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/work" }),
+});
+
+const caseStudyCollection = defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/content/case-study" }),
 });
 
 export const collections = {
     post: postCollection,
-    work: work
+    work: workCollection,
+    'case-study': caseStudyCollection,
 };

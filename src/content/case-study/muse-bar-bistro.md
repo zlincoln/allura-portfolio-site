@@ -1,14 +1,16 @@
 ---
 title: Muse Bar & Bistro
 featured: true
-image: /assets/f4ea5b7c-9e70-4992-a45e-b604c41b8c7f_rw_1920.png
+image: /assets/lunch_photo.jpg
 studySections:
   - title: Rebranding
     body: Rebranding of Muse Tapas Bar & Lounge to Muse Bistro & Bar. Lunch and Dinner menu design and flyers advertising menu.
     gallery:
-      - image: /assets/f4ea5b7c-9e70-4992-a45e-b604c41b8c7f_rw_1920.png
-      - image: /assets/ee978935-cd9a-4e37-bd67-9a7967b60557_rw_1920.png
-      - image: /assets/119c7173-0f95-4833-9483-a0afdc1b6c61_rw_1920.png
+      - image: /assets/01.10.25_muse_lunch.jpg
+      - image: /assets/01.10.25_muse_dinner.jpg
+      - image: /assets/2024_jan_cocktailspecials.jpg
+      - image: /assets/lunch_photo.jpg
+      - image: /assets/cocktail_menu.jpg
   - title: Digital & Print Media
     body: Day of the Dead Posters & Personalized Menus
     gallery:

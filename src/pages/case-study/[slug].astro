@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from '~/layouts/PageLayout.astro';
+
+const posts = await getCollection('case-study');
+const {slug} = Astro.params;
+const post = posts.find(post => post.id === slug);
+if (!post) return Astro.redirect('/404');
+
+const metadata = {
+  title: post.data.title,
+  ignoreTitleTemplate: true,
+};
+---
+<Layout metadata={metadata}>
+    <div class="container max-w-7xl mx-auto py-6 md:py-12">
+        <div class="py-12 text-center">
+            <h1>{post.data.title}</h1>
+        </div>
+        {post.data.studySections.map(section => (
+            <section>
+                <div class="border-t border-black dark:border-white my-3 md:my-6 pt-1">
+                    <h2 class="text-black dark:text-white uppercase font-bold">{section.title}</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        {section.gallery.map(galleryItem => (
+                            <img src={galleryItem.image} alt={section.title} />
+                        ))}
+                    </div>
+                    <div>
+                        <p>{section.body}</p>
+                    </div>
+                </div>
+                
+            </section>
+        ))}
+        <pre>{JSON.stringify(post, undefined, 2)}</pre>
+    </div>
+</Layout>

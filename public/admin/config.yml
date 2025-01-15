@@ -50,6 +50,7 @@ collections:
     folder: src/content/case-study
     create: true
     slug: "{{slug}}"
+    preview_path: case-study/{{slug}}
     fields:
       - label: Title
         name: title

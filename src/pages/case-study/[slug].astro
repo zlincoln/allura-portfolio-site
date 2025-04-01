@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from '~/layouts/PageLayout.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const posts = await getCollection('case-study');
 const {slug} = Astro.params;
@@ -15,26 +16,37 @@ const metadata = {
 <Layout metadata={metadata}>
     <div class="container max-w-7xl mx-auto py-6 md:py-12">
         <div class="py-12 text-center">
-            <h1>{post.data.title}</h1>
+            <h1 class="dark:text-white text-xl md:text-2xl lg:text-3xl font-light">Case Study:<br>{post.data.title}</h1>
         </div>
         {post.data.studySections.map(section => (
             <section>
                 <div class="border-t border-black dark:border-white my-3 md:my-6 pt-1">
                     <h2 class="text-black dark:text-white uppercase font-bold">{section.title}</h2>
                 </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
+                <div class="grid md:grid-cols-12 gap-6">
+                    <div class="md:col-span-7">
                         {section.gallery.map(galleryItem => (
                             <img src={galleryItem.image} alt={section.title} />
                         ))}
                     </div>
-                    <div>
-                        <p>{section.body}</p>
+                    <div class="md:col-span-5">
+                        <p class="dark:text-white text-xl md:text-2xl lg:text-3xl font-light">{section.body}</p>
+                        <CallToAction classes={{container:'px-0 md:px-0 lg:px-0 static'}}>
+                            <Fragment slot="title">
+                                Allura Lincoln
+                            </Fragment>
+                            <Fragment slot="subtitle">
+                                <p class="mb-3">Let’s connect and bring your vision to life.</p>
+                                <button class="text-white focus:ring-4 bg-black dark:text-black dark:bg-white focus:outline-none font-bold text-sm px-5 py-2.5 text-center w-full uppercase" type="button">
+                                    Work With Me
+                                </button>
+                            </Fragment>
+                        </CallToAction>
                     </div>
                 </div>
                 
             </section>
         ))}
-        <pre>{JSON.stringify(post, undefined, 2)}</pre>
+        <!-- <pre>{JSON.stringify(post, undefined, 2)}</pre> -->
     </div>
 </Layout>

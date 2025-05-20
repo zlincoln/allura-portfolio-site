@@ -1,7 +1,8 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from '~/layouts/PageLayout.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Image } from "astro:assets";
 
 const posts = await getCollection('case-study');
 const {slug} = Astro.params;
@@ -26,7 +27,7 @@ const metadata = {
                 <div class="grid md:grid-cols-12 gap-6">
                     <div class="md:col-span-7">
                         {section.gallery.map(galleryItem => (
-                            <img src={galleryItem.image} alt={section.title} />
+                            <Image src={galleryItem.image} alt={section.title} />
                         ))}
                     </div>
                     <div class="md:col-span-5">

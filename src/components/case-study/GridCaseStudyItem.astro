@@ -1,19 +1,18 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { findImage } from "~/utils/images";
-import Picture from "astro/components/Picture.astro";
+import { Image } from "astro:assets";
 
 interface Props {
     post: CollectionEntry<'case-study'>;
 }
 
-const { post } = Astro.props ;
-const image = await findImage(post.data.image);
+const { post } = Astro.props;
 ---
 <div>
+    hello
     <a href=`/case-study/${post.id}`>
         <span class="block mb-1">{post.data.title}</span>
-        <img src={image} alt=`${post.data.title}` />
+        <Image src={post.data.image} height="100" width="100" alt={post.data.title} class="w-full h-auto" />
     </a>
 </div>
 

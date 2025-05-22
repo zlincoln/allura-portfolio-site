@@ -2,13 +2,13 @@ export default {
   // Build-time variables (GitHub OAuth for CMS)
   OAUTH_GITHUB_CLIENT_ID: {
     type: 'string',
-    required: true,
-    description: 'GitHub OAuth client ID for CMS authentication'
+    required: false,
+    description: 'GitHub OAuth client ID for CMS authentication (only needed for CMS access)'
   },
   OAUTH_GITHUB_CLIENT_SECRET: {
     type: 'string',
-    required: true,
-    description: 'GitHub OAuth client secret for CMS authentication'
+    required: false,
+    description: 'GitHub OAuth client secret for CMS authentication (only needed for CMS access)'
   },
 
   // Runtime variables (Cloudflare email)

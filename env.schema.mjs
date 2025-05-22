@@ -1,13 +1,13 @@
 export default {
-  // CMS variables (optional in production)
+  // CMS variables (required in production)
   OAUTH_GITHUB_CLIENT_ID: {
     type: 'string',
-    required: false,
+    required: true,
     description: 'GitHub OAuth client ID for CMS authentication'
   },
   OAUTH_GITHUB_CLIENT_SECRET: {
     type: 'string',
-    required: false,
+    required: true,
     description: 'GitHub OAuth client secret for CMS authentication'
   },
 

@@ -2,8 +2,13 @@
 name = "allura-portfolio-site"
 pages_build_output_dir = "dist"
 compatibility_date = "2025-01-04"
+compatibility_flags = ["nodejs_compat"]  # if you need Node-style libs
+
+[[send_email]]
+name               = "EMAIL"                 # binding exposed in code
+destination_address = "you@example.com"      # your verified address
 
 [env.production.vars]
 CLOUDFLARE_ACCOUNT_ID = "e9d9ffadc167a0718c8ee1bc73f5dea8"
-CONTACT_EMAIL = "social@zacharylincoln.com"
+CONTACT_EMAIL = "contact@zacharylincoln.com"
 OAUTH_GITHUB_CLIENT_ID = "Ov23liG1yEND2hhCtYTk"

@@ -54,8 +54,7 @@ const workCollection = defineCollection({
     featured: z.boolean().optional(),
     image: image(),
     workTags: z.array(z.string()).optional(),
-    body: z.string(),
-    publishDate: z.date().optional(),
+    publishDate: z.date(),
   }),
 });
 

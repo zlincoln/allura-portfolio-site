@@ -8,10 +8,13 @@ backend:
 
 collections:
   - name: work
-    label: Portfolio
+    label: Work Items
     folder: src/content/work
     create: true
     slug: "{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
     fields:
       - label: Title
         name: title
@@ -24,7 +27,6 @@ collections:
       - label: Image
         name: image
         widget: image
-        default: "src/assets/images"
 
       - label: "Publish Date"
         name: publishDate

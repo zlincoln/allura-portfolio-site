@@ -3,6 +3,9 @@ name = "allura-portfolio-site"
 compatibility_date = "2025-01-04"
 compatibility_flags = ["nodejs_compat"]  # if you need Node-style libs
 
+[assets]
+directory = "dist"
+
 [[send_email]]
 name               = "EMAIL"                 # binding exposed in code
 destination_address = "contact@zacharylincoln.com"      # your verified address

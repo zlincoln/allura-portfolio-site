@@ -50,7 +50,7 @@ export async function POST({ request }: { request: Request }) {
       body: JSON.stringify({
         from: {
           email: `no-reply@${process.env.SITE_DOMAIN || 'allura-lincoln.com'}`,
-          name: 'Allura\'s Support Team'
+          name: 'Alluras Support Team'
         },
         to: {
           email: process.env.CONTACT_EMAIL!,

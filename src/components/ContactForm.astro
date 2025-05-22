@@ -63,6 +63,7 @@
         body: formData,
       });
 
+      const data = await response.json();
       if (response.ok) {
         // Close the modal using Flowbite's API
         const modalElement = document.querySelector('#modal-contact');
@@ -72,9 +73,8 @@
         }
         alert('Message sent successfully!');
       } else {
-        const error = await response.text();
-        console.error('Error:', error);
-        alert('Failed to send message. Please try again.');
+        console.error('Error:', data.error);
+        alert(`Failed to send message: ${data.error}`);
       }
     });
   }

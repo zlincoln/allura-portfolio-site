@@ -4,6 +4,7 @@ import { sendEmail } from './utils/mock-email';
 const formSchema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
+  subject: z.string().min(1),
   message: z.string().min(1),
 });
 
@@ -55,7 +56,7 @@ export async function POST({ request }: { request: Request }) {
           email: process.env.CONTACT_EMAIL!,
           name: 'Allura Lincoln'
         },
-        subject: 'New Message',
+        subject: data.subject as string,
         text: `
           Name: ${data.name}
           Email: ${data.email}

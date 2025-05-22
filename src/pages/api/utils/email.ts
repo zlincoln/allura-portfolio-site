@@ -7,6 +7,6 @@ export async function sendEmail({ to, subject, body }: { to: string; subject: st
     to,
     subject,
     body,
-    from: 'noreply@allura-lincoln.com',
+    from: 'no-reply@allura-lincoln.com',
   });
 }

@@ -7,4 +7,12 @@ export default {
     type: 'string',
     required: true,
   },
+  CLOUDFLARE_API_KEY: {
+    type: 'string',
+    required: true,
+  },
+  CONTACT_EMAIL: {
+    type: 'string',
+    required: true,
+  },
 }

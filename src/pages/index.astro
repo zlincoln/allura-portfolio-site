@@ -20,9 +20,17 @@ import CaseStudyGridItem from '~/components/case-study/CaseStudyGridItem.astro';
 const work = await getCollection('work');
 const caseStudies = await getCollection('case-study');
 
+// Debug output
+console.log('Work items:', work.length);
+console.log('Case studies:', caseStudies.length);
+
 // Split work items into featured and non-featured
 const featuredWork = work.filter(item => item.data.featured === true);
 const nonFeaturedWork = work.filter(item => item.data.featured !== true);
+
+// Debug output for featured work
+console.log('Featured work items:', featuredWork.length);
+console.log('Non-featured work items:', nonFeaturedWork.length);
 
 
 const metadata = {

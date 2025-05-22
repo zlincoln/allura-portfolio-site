@@ -27,6 +27,13 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'server',
+  site: 'https://allura-lincoln.com',
+  base: '/',
+  build: {
+    format: 'file',
+    client: 'dist/client',
+    server: 'dist/server',
+  },
 
   integrations: [tailwind({
     applyBaseStyles: false,
@@ -64,7 +71,7 @@ export default defineConfig({
     config: './src/config.yaml',
   }), decapCmsOauth({
     decapCMSSrcUrl: "https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js",
-  })],
+  }), cloudflare()],
 
   image: {
     domains: ['cdn.pixabay.com'],

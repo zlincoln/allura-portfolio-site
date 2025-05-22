@@ -38,7 +38,19 @@ export async function POST({ request }: { request: Request }) {
       `
     };
 
-    const emailResponse = await EMAIL.send(emailOptions);
+    // Send email using Cloudflare Worker's native email functionality
+    const emailResponse = await EMAIL.send({
+      from: {
+        email: emailOptions.from.email,
+        name: emailOptions.from.name
+      },
+      to: {
+        email: emailOptions.to.email,
+        name: emailOptions.to.name
+      },
+      subject: emailOptions.subject,
+      text: emailOptions.text
+    });
 
     if (!emailResponse.ok) {
       console.error('Email sending error:', emailResponse.error);

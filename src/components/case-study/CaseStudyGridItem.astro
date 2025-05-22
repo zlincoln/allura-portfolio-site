@@ -9,10 +9,9 @@ interface Props {
 const { post } = Astro.props;
 ---
 <div>
-    hello
     <a href=`/case-study/${post.id}`>
-        <span class="block mb-1">{post.data.title}</span>
-        <Image src={post.data.image} height="100" width="100" alt={post.data.title} class="w-full h-auto" />
+        <span class="block mb-1 uppercase tracking-wider">{post.data.title}</span>
+        <Image src={post.data.image} height="200" width="400" alt={post.data.title} class="w-full h-auto" />
     </a>
 </div>
 

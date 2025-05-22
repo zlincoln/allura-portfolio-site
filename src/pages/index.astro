@@ -12,15 +12,17 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Picture from 'astro/components/Picture.astro';
-import { Image } from 'astro:assets';
-import { findImage } from '~/utils/images';
 
 
 import { getCollection } from 'astro:content';
 import WorkGridItem from '~/components/work/WorkGridItem.astro';
-import GridCaseStudyItem from '~/components/case-study/GridCaseStudyItem.astro';
+import CaseStudyGridItem from '~/components/case-study/CaseStudyGridItem.astro';
 const work = await getCollection('work');
 const caseStudies = await getCollection('case-study');
+
+// Split work items into featured and non-featured
+const featuredWork = work.filter(item => item.data.featured === true);
+const nonFeaturedWork = work.filter(item => item.data.featured !== true);
 
 
 const metadata = {
@@ -86,54 +88,41 @@ const metadata = {
       </div>
     </div>
   </div>
-  <!-- First Portfolio Loop *************** -->
+  <!-- Featured Work *************** -->
   <section class="container max-w-7xl mx-auto py-6 md:py-12">
     <div class="border-t border-black dark:border-white my-3 md:my-6 pt-1">
-      <h1 class="text-black dark:text-white uppercase font-bold">Portfolio</h1>
+      <h1 class="text-black dark:text-white uppercase font-bold">Featured Work</h1>
     </div>
     <div class="grid sm:grid-cols-2 md:grid-cols-3">
-      {work.map(workItem => (
+      {featuredWork.map(workItem => (
         <WorkGridItem post={workItem} />
       ))}
     </div>
   </section>
+
+  <!-- Case Studies *************** -->
   <section class="container max-w-7xl mx-auto py-6 md:py-12">
     <div class="border-t border-black dark:border-white my-3 md:my-6 pt-1">
-      <h1 class="text-black dark:text-white uppercase font-bold">Case Study</h1>
+      <h1 class="text-black dark:text-white uppercase font-bold">Case Studies</h1>
     </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      {caseStudies.map(caseStudyItem => (
-        <GridCaseStudyItem post={caseStudyItem} />
+    <div class="grid sm:grid-cols-2 md:grid-cols-3">
+      {caseStudies.map(caseStudy => (
+        <CaseStudyGridItem post={caseStudy} />
       ))}
     </div>
   </section>
+
+  <!-- More Work *************** -->
   <section class="container max-w-7xl mx-auto py-6 md:py-12">
     <div class="border-t border-black dark:border-white my-3 md:my-6 pt-1">
-      <h1 class="text-black dark:text-white uppercase font-bold">Artworks</h1>
+      <h1 class="text-black dark:text-white uppercase font-bold">More Work</h1>
     </div>
     <div class="grid sm:grid-cols-2 md:grid-cols-3">
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
-      </div>
-      <div>
-          <img class="h-auto max-w-full" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">
-      </div>
+      {nonFeaturedWork.map(workItem => (
+        <WorkGridItem post={workItem} />
+      ))}
     </div>
   </section>
-  
-
   <CallToAction>
     <Fragment slot="title">
       Allura Lincoln

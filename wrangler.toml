@@ -10,8 +10,9 @@ directory = "dist"
 compatibility_date = "2025-01-04"
 compatibility_flags = ["nodejs_compat"]
 
-[[env.production.send_email]]
+[[env.production.bindings]]
 name = "EMAIL"
+type = "email"
 destination_address = "contact@zacharylincoln.com"
 
 [env.production.vars]

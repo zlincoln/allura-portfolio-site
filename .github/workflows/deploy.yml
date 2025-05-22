@@ -23,4 +23,10 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=allura-portfolio-site --branch=main
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}   # optional, for PR comments
+          env:
+            # GitHub OAuth variables for CMS
+            OAUTH_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
+            OAUTH_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
+            
+            # Cloudflare variables for email
+            CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}

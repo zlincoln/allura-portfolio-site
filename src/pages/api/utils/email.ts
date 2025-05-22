@@ -3,8 +3,11 @@ export async function sendEmail({ to, subject, body }: { to: string; subject: st
     if (!process.env.CLOUDFLARE_API_KEY) {
       throw new Error('CLOUDFLARE_API_KEY is not set');
     }
+    if (!process.env.CLOUDFLARE_ACCOUNT_ID) {
+      throw new Error('CLOUDFLARE_ACCOUNT_ID is not set');
+    }
 
-    const response = await fetch('https://api.cloudflare.com/client/v4/accounts/email-routes/messages', {
+    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/email-routes/messages`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,10 +27,14 @@ export async function sendEmail({ to, subject, body }: { to: string; subject: st
       })
     });
 
+    const responseData = await response.json();
     if (!response.ok) {
-      const error = await response.text();
-      console.error('Failed to send email:', error);
-      return { success: false, error: 'Failed to send email', details: error };
+      console.error('Failed to send email:', responseData);
+      return { 
+        success: false, 
+        error: 'Failed to send email', 
+        details: responseData.errors?.[0]?.message || 'Unknown error'
+      };
     }
 
     return { success: true };

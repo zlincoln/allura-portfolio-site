@@ -11,6 +11,10 @@ export default {
     type: 'string',
     required: true,
   },
+  CLOUDFLARE_ACCOUNT_ID: {
+    type: 'string',
+    required: true,
+  },
   CONTACT_EMAIL: {
     type: 'string',
     required: true,

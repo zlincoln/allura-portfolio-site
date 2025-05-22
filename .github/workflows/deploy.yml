@@ -56,6 +56,9 @@ jobs:
           npm ci --include=dev
           npm run build          # produces dist/
 
+          # Create .assetsignore in dist directory to prevent uploading _worker.js
+          echo "_worker" > dist/.assetsignore
+
       - name: Install Wrangler
         run: npm install -g wrangler
 

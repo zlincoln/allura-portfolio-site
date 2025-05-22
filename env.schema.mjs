@@ -1,17 +1,17 @@
 export default {
-  // Required for CMS (development only)
+  // CMS variables (only needed for development)
   OAUTH_GITHUB_CLIENT_ID: {
     type: 'string',
     required: false,
-    description: 'GitHub OAuth client ID for CMS authentication (only needed for development)'
+    description: 'GitHub OAuth client ID for CMS authentication'
   },
   OAUTH_GITHUB_CLIENT_SECRET: {
     type: 'string',
     required: false,
-    description: 'GitHub OAuth client secret for CMS authentication (only needed for development)'
+    description: 'GitHub OAuth client secret for CMS authentication'
   },
 
-  // Required for production
+  // Production variables
   CLOUDFLARE_API_KEY: {
     type: 'string',
     required: true,
@@ -28,7 +28,7 @@ export default {
     description: 'Email address for contact form submissions'
   },
 
-  // Development-specific variables
+  // Environment
   NODE_ENV: {
     type: 'string',
     default: 'production',

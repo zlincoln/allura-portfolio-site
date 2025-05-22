@@ -21,25 +21,46 @@ jobs:
           echo "SHA: ${{ github.sha }}"
           git log -n 1
 
-      - name: Install & build
+      - name: Set environment variables
         run: |
           # Set environment variables for Astro
+          echo "=== Setting Environment Variables ==="
+          echo "Setting OAUTH_GITHUB_CLIENT_ID"
           echo "OAUTH_GITHUB_CLIENT_ID=${{ secrets.OAUTH_GITHUB_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "Setting OAUTH_GITHUB_CLIENT_SECRET"
           echo "OAUTH_GITHUB_CLIENT_SECRET=${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}" >> $GITHUB_ENV
+          echo "Setting CLOUDFLARE_API_KEY"
           echo "CLOUDFLARE_API_KEY=${{ secrets.CLOUDFLARE_API_KEY }}" >> $GITHUB_ENV
+          echo "Setting CLOUDFLARE_ACCOUNT_ID"
           echo "CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" >> $GITHUB_ENV
+          echo "Setting CONTACT_EMAIL"
           echo "CONTACT_EMAIL=${{ secrets.CONTACT_EMAIL }}" >> $GITHUB_ENV
+          echo "=== Environment Variables Set ==="
 
-          # Debug environment variables
-          echo "=== Environment Variables ==="
-          echo "OAUTH_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}"
-          echo "OAUTH_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}"
-          echo "CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}"
-          echo "CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
-          echo "CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}"
-          echo "=== End Environment Variables ==="
+      - name: Debug environment variables
+        run: |
+          echo "=== Debugging Environment ==="
+          echo "Current directory: $(pwd)"
+          echo "Environment variables:"
+          env | sort
+          echo "=== End Debugging ==="
 
-          # Run the build
+      - name: Install & build
+        env:
+          OAUTH_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
+          OAUTH_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+        run: |
+          echo "=== Build Environment ==="
+          echo "OAUTH_GITHUB_CLIENT_ID: $OAUTH_GITHUB_CLIENT_ID"
+          echo "OAUTH_GITHUB_CLIENT_SECRET: $OAUTH_GITHUB_CLIENT_SECRET"
+          echo "CLOUDFLARE_API_KEY: $CLOUDFLARE_API_KEY"
+          echo "CLOUDFLARE_ACCOUNT_ID: $CLOUDFLARE_ACCOUNT_ID"
+          echo "CONTACT_EMAIL: $CONTACT_EMAIL"
+          echo "=== End Build Environment ==="
+
           npm ci
           npm run build          # produces dist/
 

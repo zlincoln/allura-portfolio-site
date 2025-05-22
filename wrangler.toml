@@ -6,6 +6,9 @@ compatibility_flags = ["nodejs_compat"]  # if you need Node-style libs
 [assets]
 directory = "dist"
 
+[observability.logs]
+enabled = false
+
 [env.production]
 compatibility_date = "2025-01-04"
 compatibility_flags = ["nodejs_compat"]
@@ -23,5 +26,3 @@ compatibility_flags = ["nodejs_compat"]
 CLOUDFLARE_ACCOUNT_ID = "e9d9ffadc167a0718c8ee1bc73f5dea8"
 CONTACT_EMAIL = "contact@zacharylincoln.com"
 OAUTH_GITHUB_CLIENT_ID = "Ov23liG1yEND2hhCtYTk"
-
-

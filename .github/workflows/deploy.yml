@@ -22,39 +22,24 @@ jobs:
           git log -n 1
 
       - name: Install & build
-        env:
-          OAUTH_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
-          OAUTH_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
         run: |
+          # Set environment variables for Astro
+          echo "OAUTH_GITHUB_CLIENT_ID=${{ secrets.OAUTH_GITHUB_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "OAUTH_GITHUB_CLIENT_SECRET=${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}" >> $GITHUB_ENV
+          echo "CLOUDFLARE_API_KEY=${{ secrets.CLOUDFLARE_API_KEY }}" >> $GITHUB_ENV
+          echo "CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" >> $GITHUB_ENV
+          echo "CONTACT_EMAIL=${{ secrets.CONTACT_EMAIL }}" >> $GITHUB_ENV
+
           # Debug environment variables
           echo "=== Environment Variables ==="
-          echo "OAUTH_GITHUB_CLIENT_ID: ${OAUTH_GITHUB_CLIENT_ID}"
-          echo "OAUTH_GITHUB_CLIENT_SECRET: ${OAUTH_GITHUB_CLIENT_SECRET}"
-          echo "CLOUDFLARE_API_KEY: ${CLOUDFLARE_API_KEY}"
-          echo "CLOUDFLARE_ACCOUNT_ID: ${CLOUDFLARE_ACCOUNT_ID}"
-          echo "CONTACT_EMAIL: ${CONTACT_EMAIL}"
+          echo "OAUTH_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}"
+          echo "OAUTH_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}"
+          echo "CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}"
+          echo "CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
+          echo "CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}"
           echo "=== End Environment Variables ==="
 
-          # Set all required environment variables
-          export OAUTH_GITHUB_CLIENT_ID=${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
-          export OAUTH_GITHUB_CLIENT_SECRET=${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
-          export CLOUDFLARE_API_KEY=${{ secrets.CLOUDFLARE_API_KEY }}
-          export CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          export CONTACT_EMAIL=${{ secrets.CONTACT_EMAIL }}
-
-          # Debug environment variables after export
-          echo "=== Environment Variables After Export ==="
-          echo "OAUTH_GITHUB_CLIENT_ID: $OAUTH_GITHUB_CLIENT_ID"
-          echo "OAUTH_GITHUB_CLIENT_SECRET: $OAUTH_GITHUB_CLIENT_SECRET"
-          echo "CLOUDFLARE_API_KEY: $CLOUDFLARE_API_KEY"
-          echo "CLOUDFLARE_ACCOUNT_ID: $CLOUDFLARE_ACCOUNT_ID"
-          echo "CONTACT_EMAIL: $CONTACT_EMAIL"
-          echo "=== End Environment Variables After Export ==="
-
-          # Run the build with all variables available
+          # Run the build
           npm ci
           npm run build          # produces dist/
 

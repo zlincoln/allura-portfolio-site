@@ -1,14 +1,14 @@
 export default {
-  // Required for CMS
+  // Required for CMS (development only)
   OAUTH_GITHUB_CLIENT_ID: {
     type: 'string',
-    required: true,
-    description: 'GitHub OAuth client ID for CMS authentication'
+    required: false,
+    description: 'GitHub OAuth client ID for CMS authentication (only needed for development)'
   },
   OAUTH_GITHUB_CLIENT_SECRET: {
     type: 'string',
-    required: true,
-    description: 'GitHub OAuth client secret for CMS authentication'
+    required: false,
+    description: 'GitHub OAuth client secret for CMS authentication (only needed for development)'
   },
 
   // Required for production
@@ -27,4 +27,11 @@ export default {
     required: true,
     description: 'Email address for contact form submissions'
   },
+
+  // Development-specific variables
+  NODE_ENV: {
+    type: 'string',
+    default: 'production',
+    description: 'Node environment (production or development)'
+  }
 }

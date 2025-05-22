@@ -61,4 +61,3 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=allura-portfolio-site --branch=main
-            CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}

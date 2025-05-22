@@ -73,8 +73,8 @@
         }
         alert('Message sent successfully!');
       } else {
-        console.error('Error:', data.error);
-        alert(`Failed to send message: ${data.error}`);
+        console.error('Error:', data.error, data.details);
+        alert(`Failed to send message: ${data.error}\nDetails: ${data.details}`);
       }
     });
   }

@@ -1,17 +1,17 @@
 export default {
-  // Build-time variables (GitHub OAuth for CMS)
+  // Required for CMS
   OAUTH_GITHUB_CLIENT_ID: {
     type: 'string',
-    required: false,
-    description: 'GitHub OAuth client ID for CMS authentication (only needed for CMS access)'
+    required: true,
+    description: 'GitHub OAuth client ID for CMS authentication'
   },
   OAUTH_GITHUB_CLIENT_SECRET: {
     type: 'string',
-    required: false,
-    description: 'GitHub OAuth client secret for CMS authentication (only needed for CMS access)'
+    required: true,
+    description: 'GitHub OAuth client secret for CMS authentication'
   },
 
-  // Runtime variables (Cloudflare email)
+  // Required for production
   CLOUDFLARE_API_KEY: {
     type: 'string',
     required: true,
@@ -24,7 +24,7 @@ export default {
   },
   CONTACT_EMAIL: {
     type: 'string',
-    required: false,
+    required: true,
     description: 'Email address for contact form submissions'
   },
 }

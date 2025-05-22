@@ -6,11 +6,14 @@ compatibility_flags = ["nodejs_compat"]  # if you need Node-style libs
 [assets]
 directory = "dist"
 
-[[send_email]]
-name               = "EMAIL"                 # binding exposed in code
-destination_address = "contact@zacharylincoln.com"      # your verified address
-
 [env.production]
+compatibility_date = "2025-01-04"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production.send_email]
+name = "EMAIL"
+destination_address = "contact@zacharylincoln.com"
+
 [env.production.vars]
 CLOUDFLARE_ACCOUNT_ID = "e9d9ffadc167a0718c8ee1bc73f5dea8"
 CONTACT_EMAIL = "contact@zacharylincoln.com"

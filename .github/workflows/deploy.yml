@@ -35,36 +35,18 @@ jobs:
           env | sort
           echo "=== End Debugging ==="
 
-      - name: Install & build
-        env:
-          OAUTH_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
-          OAUTH_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
-          NODE_ENV: production
-        run: |
-          echo "=== Build Environment ==="
-          echo "OAUTH_GITHUB_CLIENT_ID: $OAUTH_GITHUB_CLIENT_ID"
-          echo "OAUTH_GITHUB_CLIENT_SECRET: $OAUTH_GITHUB_CLIENT_SECRET"
-          echo "CLOUDFLARE_API_KEY: $CLOUDFLARE_API_KEY"
-          echo "CLOUDFLARE_ACCOUNT_ID: $CLOUDFLARE_ACCOUNT_ID"
-          echo "CONTACT_EMAIL: $CONTACT_EMAIL"
-          echo "=== End Build Environment ==="
+      - name: Install dependencies
+        run: npm ci
 
-          # Install all dependencies (including devDependencies)
-          npm ci --include=dev
-          npm run build          # produces dist/
+      - name: Build
+        run: npm run build
 
-          # Create .assetsignore in dist directory to prevent uploading _worker.js
-          echo "_worker" > dist/.assetsignore
-
-      - name: Install Wrangler
-        run: npm install -g wrangler
-
-      - name: Deploy to Cloudflare Worker
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          wrangler deploy --name allura-portfolio-site --env production --assets ./dist
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: allura-portfolio-site
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerConfigPath: wrangler.toml

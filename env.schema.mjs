@@ -24,7 +24,7 @@ export default {
   },
   CONTACT_EMAIL: {
     type: 'string',
-    required: true,
+    required: false,
     description: 'Email address for contact form submissions'
   },
 }

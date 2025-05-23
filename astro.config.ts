@@ -2,7 +2,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { defineConfig } from 'astro/config';
-import type { EmailSendOptions, EmailResponse } from './src/types/email';
 
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';

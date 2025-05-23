@@ -1,39 +1,27 @@
 name: Deploy to Cloudflare Pages
+
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    env:
-      OAUTH_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
-      OAUTH_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
-      CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0  # Get all history
-          ref: ${{ github.ref }}  # Use the exact ref that triggered the workflow
-
-      - name: Debug checkout
-        run: |
-          echo "Current branch: ${{ github.ref }}"
-          echo "SHA: ${{ github.sha }}"
-          git log -n 1
-
-      - name: Debug environment variables
-        run: |
-          echo "=== Debugging Environment ==="
-          echo "Current directory: $(pwd)"
-          echo "Environment variables:"
-          env | sort
-          echo "=== End Debugging ==="
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -41,7 +29,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to Cloudflare Pages
+      - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

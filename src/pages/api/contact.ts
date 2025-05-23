@@ -1,5 +1,5 @@
 // Define types for Cloudflare Email binding
-declare const CONTACT_EMAIL: {
+type CloudflareEmail = {
   send: (message: {
     from: string;
     to: string;
@@ -56,10 +56,13 @@ function validateFormData(data: Record<string, unknown>): ValidationResult {
 }
 
 // Cloudflare Pages Functions handler
+// Define the Cloudflare Email binding type
+declare const CLOUDFLARE_EMAIL: CloudflareEmail;
+
 export async function onRequestPost(context: {
   request: Request;
   env: {
-    CONTACT_EMAIL: string;
+    CLOUDFLARE_EMAIL: CloudflareEmail;
   };
 }): Promise<Response> {
   try {
@@ -101,7 +104,7 @@ export async function onRequestPost(context: {
     `;
 
     // Send email using Cloudflare's native email binding
-    const emailResponse = await CONTACT_EMAIL.send({
+    const emailResponse = await context.env.CLOUDFLARE_EMAIL.send({
       from: `no-reply@${domain}`,
       to: recipient,
       subject: `New Contact: ${subject}`,

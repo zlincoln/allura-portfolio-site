@@ -11,7 +11,7 @@ directory = "./dist"
 
 # Email binding for Cloudflare Workers
 [[email]]
-name = "CONTACT_EMAIL"
+name = "CLOUDFLARE_EMAIL"
 to = "contact@zacharylincoln.com"
 
 # Environment variables

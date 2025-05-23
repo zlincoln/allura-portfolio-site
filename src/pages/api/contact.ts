@@ -1,3 +1,10 @@
+// CORS headers
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
 // Define types for Cloudflare Email binding
 type CloudflareEmail = {
   send: (message: {
@@ -6,6 +13,25 @@ type CloudflareEmail = {
     subject: string;
     text: string;
   }) => Promise<{ success: boolean; error?: string }>;
+};
+
+// Helper function to create a JSON response
+interface JsonResponseData {
+  [key: string]: unknown;
+  error?: string;
+  details?: unknown;
+  success?: boolean;
+}
+
+const jsonResponse = (data: JsonResponseData, status = 200, headers: Record<string, string> = {}) => {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      'Content-Type': 'application/json',
+      ...corsHeaders,
+      ...headers,
+    },
+  });
 };
 
 // Define types for form data and validation results
@@ -59,6 +85,14 @@ function validateFormData(data: Record<string, unknown>): ValidationResult {
 // Define the Cloudflare Email binding type
 declare const CLOUDFLARE_EMAIL: CloudflareEmail;
 
+// Handle OPTIONS request for CORS preflight
+export async function onRequestOptions() {
+  return new Response(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
+
 export async function onRequestPost(context: {
   request: Request;
   env: {
@@ -72,15 +106,12 @@ export async function onRequestPost(context: {
     const result = validateFormData(data);
 
     if (!result.success) {
-      return new Response(
-        JSON.stringify({ 
+      return jsonResponse(
+        { 
           error: 'Validation failed',
           details: result.errors
-        }), 
-        { 
-          status: 400, 
-          headers: { 'Content-Type': 'application/json' } 
-        }
+        },
+        400
       );
     }
 
@@ -113,48 +144,24 @@ export async function onRequestPost(context: {
 
     if (!emailResponse.success) {
       console.error('Email sending failed:', emailResponse.error);
-      return new Response(
-        JSON.stringify({ 
+      return jsonResponse(
+        { 
           error: 'Failed to send email',
           details: emailResponse.error || 'Unknown error'
-        }),
-        { 
-          status: 500, 
-          headers: { 
-            'Content-Type': 'application/json',
-            'Cache-Control': 'no-store, max-age=0',
-          } 
-        }
+        },
+        500
       );
     }
 
-    return new Response(
-      JSON.stringify({ 
-        success: true,
-        message: 'Your message has been sent successfully!'
-      }),
-      { 
-        status: 200, 
-        headers: { 
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-store, max-age=0',
-        } 
-      }
-    );
+    return jsonResponse({ success: true });
   } catch (error) {
-    console.error('Error processing contact form:', error);
-    return new Response(
-      JSON.stringify({ 
-        error: 'Internal server error',
-        details: error instanceof Error ? error.message : 'An unexpected error occurred',
-      }),
+    console.error('Error processing request:', error);
+    return jsonResponse(
       { 
-        status: 500, 
-        headers: { 
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-store, max-age=0',
-        } 
-      }
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
+      500
     );
   }
 };

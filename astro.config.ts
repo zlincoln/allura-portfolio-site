@@ -29,6 +29,9 @@ export default defineConfig({
   output: 'server',
   site: 'https://allura-lincoln.com',
   base: '/',
+  adapter: process.env.NODE_ENV === 'production' 
+    ? cloudflare({ imageService: 'cloudflare' })
+    : undefined,
   build: {
     format: 'file',
     client: 'dist/client',
@@ -92,7 +95,5 @@ export default defineConfig({
     },
   },
 
-  adapter: cloudflare({
-    imageService: 'cloudflare'
-  }),
+
 });

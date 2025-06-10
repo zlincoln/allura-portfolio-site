@@ -65,11 +65,11 @@
   import { Modal } from 'flowbite';
   
   document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contact-form');
-    const submitButton = document.getElementById('submit-button');
-    const buttonText = document.getElementById('button-text');
-    const buttonSpinner = document.getElementById('button-spinner');
-    const formError = document.getElementById('form-error');
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const submitButton = document.getElementById('submit-button') as HTMLButtonElement | null;
+    const buttonText = document.getElementById('button-text') as HTMLSpanElement | null;
+    const buttonSpinner = document.getElementById('button-spinner') as HTMLSpanElement | null;
+    const formError = document.getElementById('form-error') as HTMLParagraphElement | null;
     
     if (form && submitButton && buttonText && buttonSpinner && formError) {
       form.addEventListener('submit', async (e) => {
@@ -85,19 +85,46 @@
         buttonSpinner.classList.remove('hidden');
         
         try {
+          // First, test the API endpoint
+          console.log('Testing API endpoint...');
+          const testResponse = await fetch('/api/test', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ test: 'test' }),
+          });
+          
+          console.log('Test response status:', testResponse.status);
+          const testData = await testResponse.json().catch(() => ({}));
+          console.log('Test response data:', testData);
+          
+          if (!testResponse.ok) {
+            throw new Error(`Test API failed with status ${testResponse.status}`);
+          }
+          
+          // If test passes, try the actual contact form submission
           const formData = new FormData(form);
+          console.log('Submitting form data:', Object.fromEntries(formData.entries()));
+          
           const response = await fetch('/api/contact', {
             method: 'POST',
             body: formData,
           });
           
-          const data = await response.json();
+          console.log('Contact form response status:', response.status);
+          const data = await response.json().catch(err => {
+            console.error('Failed to parse JSON response:', err);
+            return { error: 'Invalid response from server', details: 'Could not parse response' };
+          });
+          
+          console.log('Contact form response data:', data);
           
           if (response.ok) {
             // Close the modal using Flowbite's API
-            const modalElement = document.querySelector('#modal-contact');
+            const modalElement = document.querySelector('#modal-contact') as HTMLElement | null;
             if (modalElement) {
-              const modal = Modal.getInstance(modalElement) || new Modal(modalElement);
+              const modal = new Modal(modalElement);
               modal.hide();
             }
             
